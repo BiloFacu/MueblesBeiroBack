@@ -15,7 +15,7 @@ const controllers = {
     productId : async (req, res) =>{
         const id = req.params.id
         const product = await Products.find({
-            id:id
+            _id:id
         })
         res.send(product)
     },
@@ -29,7 +29,7 @@ const controllers = {
     userId : async (req,res) => {
         let id = req.params.id
         const user = await User.find({
-            id:id
+            _id:id
         })
         res.send(user)
     },
@@ -58,6 +58,33 @@ const controllers = {
           });
         });
     },
+    createUser : async (req,res) => {
+        const user = new User({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            email: req.body.email,
+            password: req.body.password,
+            address: req.body.address,
+            country: req.body.country,
+            city: req.body.city,
+            zipCode: req.body.zipCode,
+            creditCard: req.body.creditCard
+        })
+        user.save()
+        .then(result => {
+          console.log(result);
+          res.status(201).json({
+            message: 'Usuario creado exitosamente',
+            user: result
+          });
+        })
+        .catch(err => {
+          console.log(err);
+          res.status(500).json({
+            error: err
+          });
+        });
+    }
 }
 
 export default controllers;

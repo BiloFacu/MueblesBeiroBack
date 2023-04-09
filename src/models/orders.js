@@ -1,13 +1,8 @@
 import mongoose from "mongoose";
 import mongoosePaginate from "mongoose-paginate-v2"
 const schema = new mongoose.Schema({
-    _id:false,
-    id:{
-        type:Number,
-        unique:true
-    },
     user_id:{
-        type:Number,
+        type:String,
         required:true
     },
     product:{

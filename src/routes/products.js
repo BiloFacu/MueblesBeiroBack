@@ -9,5 +9,7 @@ router.get("/products/:category", productsController.productsCategory)
 router.post("/products",productsController.createProduct);
 
 router.get("/user/:id",productsController.userId);
+router.post("/user", productsController.createUser)
+
 
 export default router;

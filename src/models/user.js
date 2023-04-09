@@ -1,18 +1,21 @@
 import mongoose from "mongoose";
 import mongoosePaginate from "mongoose-paginate-v2"
 const schema = new mongoose.Schema({ 
-    _id:false,
-    id:{
-        type: Number,
-        unique: true
-    },
-    name:{
+    firstName:{
         type: String,
-        required: true
+        required: true,
+        trim: true
+    },
+    lastName:{
+        type: String,
+        required: true,
+        trim: true
     },
     email:{
         type: String,
-        required: true
+        required: true,
+        lowercase: true,
+        unique: true
     },
     password:{
         type: String,
@@ -36,7 +39,6 @@ const schema = new mongoose.Schema({
     },
     creditCard:{
         type: String,
-        required: true
     },
     date:{
         type:Date, 
