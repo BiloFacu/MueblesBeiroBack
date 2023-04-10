@@ -34,6 +34,7 @@ const controllers = {
         res.send(user)
     },
     createProduct : async (req,res) => {
+        console.log(req)
         const product = new Products({
             name: req.body.name,
             description: req.body.description,
