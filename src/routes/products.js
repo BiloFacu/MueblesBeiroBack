@@ -27,6 +27,7 @@ router.get("/products/:id", productsController.productId)
 router.get("/products/:category", productsController.productsCategory)
 
 router.post("/products",fileUpload,productsController.createProduct);
+router.get("/:image", productsController.getImage);
 
 router.get("/user/:id",productsController.userId);
 router.post("/user", productsController.createUser)

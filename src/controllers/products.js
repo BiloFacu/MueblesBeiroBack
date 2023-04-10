@@ -1,7 +1,7 @@
 import Products from "../models/products.js"
 import User from "../models/user.js"
 import path from "path"
-import fs from "fs"
+import fs from 'fs'
 
 import { fileURLToPath } from 'url'
 const __filename = fileURLToPath(import.meta.url);
@@ -25,6 +25,13 @@ const controllers = {
             _id:id
         })
         res.send(product)
+    },
+    getImage : async (req, res) => {
+      const image = req.params.image;
+      const pathImage = path.resolve(__dirname, `../images/${image}`);
+      if(await fs.existsSync(pathImage)){
+        res.sendFile(pathImage)
+      }
     },
     productsCategory : async (req, res) => {
         const category = req.params.category
