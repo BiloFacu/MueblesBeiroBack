@@ -1,5 +1,12 @@
 import Products from "../models/products.js"
 import User from "../models/user.js"
+import path from "path"
+import fs from "fs"
+
+import { fileURLToPath } from 'url'
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const controllers = {
     index : async (req,res)=>{
         let page = req.params.page;
@@ -34,13 +41,14 @@ const controllers = {
         res.send(user)
     },
     createProduct : async (req,res) => {
-        console.log(req)
+        console.log(req.file)
+        /* const data = fs.readFileSync(path.join(__dirname, '../images/' + req.file.filename)) */
         const product = new Products({
             name: req.body.name,
             description: req.body.description,
             brand: req.body.brand,
             price: req.body.price,
-            img: req.body.img,
+            img: req.file.path,/* filename */
             category: req.body.category,
             stock: req.body.stock
         })
