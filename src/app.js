@@ -34,3 +34,5 @@ app.use('/public', express.static(path.join(__dirname, '../images')))
 
 
 app.use("/",productRoutes)
+
+export default app
