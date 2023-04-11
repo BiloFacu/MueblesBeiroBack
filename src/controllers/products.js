@@ -12,11 +12,12 @@ const controllers = {
         let page = req.params.page;
 
         const products = await Products.paginate({},{page: page,limit: 10});
-
+        console.log(products)
         res.send(products)
     },
     all : async (req,res) => {
         const products = await Products.find()
+        console.log(products)
         res.send(products)
     },
     productId : async (req, res) =>{
@@ -35,9 +36,11 @@ const controllers = {
     },
     productsCategory : async (req, res) => {
         const category = req.params.category
+        console.log(category)
         const products = await Products.find({
             category:category
         })
+        console.log(products)
         res.send(products)
     },
     userId : async (req,res) => {
@@ -55,7 +58,7 @@ const controllers = {
             description: req.body.description,
             brand: req.body.brand,
             price: req.body.price,
-            img: req.file.path,/* filename */
+            img: req.file.filename,
             category: req.body.category,
             stock: req.body.stock
         })

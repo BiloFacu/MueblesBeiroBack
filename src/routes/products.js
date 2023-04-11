@@ -22,12 +22,14 @@ const fileUpload = multer({
 
 
 router.get("/products", productsController.all)
-router.get("/products/:page",productsController.index);
-router.get("/products/:id", productsController.productId)
 router.get("/products/:category", productsController.productsCategory)
+router.get("/product/:id", productsController.productId)
+
 
 router.post("/products",fileUpload,productsController.createProduct);
-router.get("/:image", productsController.getImage);
+router.use("/public", express.static(path.join(__dirname, '../images')))
+
+/* router.get("/:image", productsController.getImage); */
 
 router.get("/user/:id",productsController.userId);
 router.post("/user", productsController.createUser)

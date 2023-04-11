@@ -1,6 +1,11 @@
 import express from "express"
 import mongoose from "mongoose";
 import productRoutes from "./routes/products.js";
+import path from "path"
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const port = 3000;
@@ -25,6 +30,7 @@ mongoose.connect(
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use('/public', express.static(path.join(__dirname, '../images')))
 
 
 app.use("/",productRoutes)
