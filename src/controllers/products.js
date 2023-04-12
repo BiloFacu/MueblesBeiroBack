@@ -4,6 +4,7 @@ import path from "path"
 import fs from 'fs'
 
 import { fileURLToPath } from 'url'
+import { application } from "express"
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -38,13 +39,25 @@ const controllers = {
         })
         res.send(products)
     },
-    userId : async (req,res) => {
-        let id = req.params.id
-        const user = await User.find({
-            _id:id
+    getUser : async (req,res) => {
+        const { password, email } = req.query
+        try {
+          const user = await User.find({
+            email,
+            password
         })
-        res.send(user)
-    },
+        console.log(user.length)
+        if(user.length === 1){
+          console.log("chau")
+          res.send(user)
+        } else {
+          console.log("hola")
+          res.json("Este usuario no existe");
+        }
+        } catch {
+          console.log("quemierdapasa")
+        }
+      },
     createProduct : async (req,res) => {
         const product = new Products({
             name: req.body.name,
@@ -71,6 +84,13 @@ const controllers = {
         });
     },
     createUser : async (req,res) => {
+      const findUser = await User.find({
+        email: req.body.email
+      })
+      if(findUser.length >= 1){
+        return res.json("Este Email ya esta en uso");
+      } else {
+      try {
         const user = new User({
             firstName: req.body.firstName,
             lastName: req.body.lastName,
@@ -84,19 +104,14 @@ const controllers = {
         })
         user.save()
         .then(result => {
-          console.log(result);
-          res.status(201).json({
-            message: 'Usuario creado exitosamente',
-            user: result
-          });
+          res.status(201)
+          res.json("Te has registrado con exito")
         })
-        .catch(err => {
-          console.log(err);
-          res.status(500).json({
-            error: err
-          });
-        });
+      } catch (error) {
+        res.json("Este Email ya esta en uso");
+      }         
     }
+  }
 }
 
 export default controllers;

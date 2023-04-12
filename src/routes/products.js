@@ -31,7 +31,7 @@ router.use("/public", express.static(path.join(__dirname, '../images')))
 
 /* router.get("/:image", productsController.getImage); */
 
-router.get("/user/:id",productsController.userId);
+router.get("/users",productsController.getUser);
 router.post("/user", productsController.createUser)
 
 
