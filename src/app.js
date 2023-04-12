@@ -27,14 +27,6 @@ mongoose.connect(
 )
 .then(() => console.log("Connected to mongoDB"))
 
-const config = {
-    authRequired: false,
-    auth0Logout: true,
-    secret: 'a long, randomly-generated string stored in env',
-    baseURL: 'http://localhost:3000/home',
-    clientID: 'MILHNUBSiSawOACTcY6HoEgrSWNYKWjK',
-    issuerBaseURL: 'https://dev-lj3qerk6wippqq2n.us.auth0.com'
-  };
 
 
 app.use(express.urlencoded({ extended: true }));
@@ -58,12 +50,6 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.use(auth(config));
-
-// req.isAuthenticated is provided from the auth router
-app.get('/', (req, res) => {
-  res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
-});
 app.use("/",productRoutes)
 
 export default app
