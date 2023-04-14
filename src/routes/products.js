@@ -28,7 +28,7 @@ router.put("/product/:id", productsController.updateProduct)
 router.delete("/product/:id", productsController.deleteProduct)
 
 
-router.post("/products",fileUpload,productsController.createProduct);
+router.post("/products", productsController.createProduct);
 router.use("/public", express.static(path.join(__dirname, '../images')))
 
 /* router.get("/:image", productsController.getImage); */
