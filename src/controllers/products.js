@@ -32,6 +32,34 @@ const controllers = {
         res.sendFile(pathImage)
       }
     },
+    deleteProduct : async (req, res) => {
+      console.log(req)
+      try {
+        const { id } = req.params;
+        const modeloEliminado = await Products.findByIdAndDelete(id);
+        if (!modeloEliminado) {
+          return res.status(404).json({ error: 'Modelo no encontrado' });
+        }
+        res.json({ message: 'Modelo eliminado correctamente' });
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error interno del servidor' });
+      }    
+    },
+    updateProduct : async (req, res) => {
+      const { id } = req.params;
+      console.log(req.body)
+      try{
+          const modelo = await Products.findByIdAndUpdate(id, req.body , { new: true });
+        if (!modelo) {
+          return res.status(404).send({ error: 'No se encontró el modelo' });
+        }
+        res.send({ modelo });
+      } catch (error) {
+        console.error(error);
+        res.status(500).send({ error: 'Error del servidor' });
+      }
+    },
     productsCategory : async (req, res) => {
         const category = req.params.category
         const products = await Products.find({

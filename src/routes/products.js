@@ -24,6 +24,8 @@ const fileUpload = multer({
 router.get("/products", productsController.all)
 router.get("/products/:category", productsController.productsCategory)
 router.get("/product/:id", productsController.productId)
+router.put("/product/:id", productsController.updateProduct)
+router.delete("/product/:id", productsController.deleteProduct)
 
 
 router.post("/products",fileUpload,productsController.createProduct);
