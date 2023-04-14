@@ -87,12 +87,13 @@ const controllers = {
         }
       },
     createProduct : async (req,res) => {
+      console.log(req.body)
         const product = new Products({
             name: req.body.name,
             description: req.body.description,
             brand: req.body.brand,
             price: req.body.price,
-            img: req.file.filename,
+            img: req.body.img,
             category: req.body.category,
             stock: req.body.stock
         })
@@ -107,6 +108,7 @@ const controllers = {
         .catch(err => {
           console.log(err);
           res.status(500).json({
+            message: "Ha ocurrido un error intentalo devuelta",
             error: err
           });
         });
