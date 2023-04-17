@@ -1,5 +1,7 @@
 import Products from "../models/products.js"
 import User from "../models/user.js"
+import Cbu from "../models/cbu.js"
+import Email from "../models/emails.js"
 import path from "path"
 import fs from 'fs'
 
@@ -86,6 +88,32 @@ const controllers = {
           console.log("quemierdapasa")
         }
       },
+    updateCbu : async (req, res) => {
+      const {name, cbu, alias} = req.body
+      const id = "643d455435eb0770b7b2d775"
+      try{
+        const newCbu = await Cbu.findByIdAndUpdate(id, {
+        name,
+        cbu,
+        alias
+      })
+        res.json("Se ha actualizado el CBU")
+      } catch {
+        res.json("Ha ocurrido un error vuelve a intentarlo")
+      }
+    },
+    getCbu : async (req, res) => {
+        const cbu = await Cbu.find()
+        res.send(cbu)
+    },
+    postEmails : async (req, res) => {
+      const {name, email} = req.body
+      const newEmail = await Email.create({
+        name,
+        email
+      })
+      newEmail.save()
+    },
     createProduct : async (req,res) => {
       console.log(req.body)
         const product = new Products({
