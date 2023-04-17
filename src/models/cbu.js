@@ -1,23 +1,15 @@
 import mongoose from "mongoose";
 import mongoosePaginate from "mongoose-paginate-v2"
 const schema = new mongoose.Schema({
-    user_id:{
+    name:{
         type:String,
         required:true
     },
-    product:{
-        type:String,
-        required:true
-    },
-    totalPrice:{
+    cbu:{
         type:Number,
         required:true
     },
-    date:{
-        type:Date, 
-        default:new Date()
-    },
-    state:{
+    alias:{
         type:String,
         required:true
     }
@@ -26,6 +18,6 @@ const schema = new mongoose.Schema({
 })
 
 schema.plugin(mongoosePaginate)
-const ordersModel = mongoose.model("orders",schema);
+const ordersModel = mongoose.model("cbu",schema);
 
 export default ordersModel;
