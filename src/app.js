@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import productRoutes from "./routes/products.js";
 import path from "path"
 import { fileURLToPath } from 'url'
-import { auth } from 'express-openid-connect';
+import bodyParser from 'body-parser'
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -31,6 +31,7 @@ mongoose.connect(
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(bodyParser.json());
 app.use('/public', express.static(path.join(__dirname, '../images')))
 app.use(function (req, res, next) {
     // Website you wish to allow to connect
