@@ -32,6 +32,7 @@ router.post("/products", fileUpload, productsController.createProduct);
 router.use("/public", express.static(path.join(__dirname, '../images')))
 
 router.get("/:image", productsController.getImage);
+
 router.put("/cbu", productsController.updateCbu);
 router.get("/cbus", productsController.getCbu);
 
