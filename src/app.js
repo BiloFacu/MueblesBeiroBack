@@ -35,7 +35,7 @@ app.use(bodyParser.json());
 app.use('/public', express.static(path.join(__dirname, '../images')))
 app.use(function (req, res, next) {
     // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'https://muebles-beiro-front.vercel.app', 'https://mueblesbeiro.shop/');
+    res.setHeader('Access-Control-Allow-Origin', 'https://muebles-beiro-front.vercel.app', 'https://mueblesbeiro.shop');
 
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
