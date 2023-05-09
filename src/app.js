@@ -12,6 +12,8 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const port = 3000;
 
+app.use(cors())
+
 app.listen({port}, ()=>{
     {`Servidor corriendo en el puerto ${port}`}
 });
@@ -28,7 +30,7 @@ mongoose.connect(
 .then(() => console.log("Connected to mongoDB"))
 
 
-app.use(cors())
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(bodyParser.json());
